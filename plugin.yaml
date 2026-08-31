@@ -1,0 +1,34 @@
+name: "@kalo-build/plugin-openapi-sdk-ts"
+displayName: "OpenAPI TypeScript SDK"
+description: "Generates a typed TypeScript HTTP client SDK from an OpenAPI 3.1 specification."
+version: "1.0.0"
+
+input:
+  format: "KA:OA1:YAML1"
+  description: "OpenAPI 3.1 YAML specification"
+  suggestedStore:
+    name: "KA_OA_YAML"
+    type: "localFileSystem"
+    path: "./docs/openapi"
+
+output:
+  format: "KA:OA1:TS_CLIENT1"
+  description: "Generated TypeScript HTTP client source files"
+  suggestedStore:
+    name: "KA_OA_TS_CLIENT"
+    type: "localFileSystem"
+    path: "./generated/client"
+
+configSchema:
+  specFileName:
+    type: string
+    description: "Name of the OpenAPI spec file to read (default: openapi.yaml)"
+  generateTypes:
+    type: boolean
+    description: "Generate TypeScript interface definitions (default: true). Set false when using external types from another plugin."
+  generateClient:
+    type: boolean
+    description: "Generate typed fetch client (default: true)"
+  typesImportPath:
+    type: string
+    description: "Import path the client uses for type imports (default: ./types). Set to an external path when types come from another plugin (e.g. plugin-morphe-ts-types)."
